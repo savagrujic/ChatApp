@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+    
+}
+.left-container {
+    background-color: red;
+    flex: 1;
+    height: 100vh;
+    border-top-right-radius: 200px;
+    border-bottom-right-radius: 200px;
+}
+.right-container {
+    flex: 1;
+}
