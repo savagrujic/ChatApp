@@ -6,12 +6,14 @@ export default function() {
         <div className="wrapper">
             <div className="right-container">
                 <form>
-                    <h1>Login</h1>
+                    <h1>Registration</h1>
                     <input className="input1" placeholder="Username" />
-                    <input className="input2" placeholder="Password"/>
+                    <input className="input2" placeholder="Email"/>
+                    <input className="input1" placeholder="Password" />
+                    <input className="input2" placeholder="Confirm Password"/>
                     <p>Forgot Password</p>
                     <button>Login</button>
-                    <p>or login with platforms</p>
+                    <p>or registrate with platforms</p>
                     <FaGoogle />
                 </form>
             </div>
