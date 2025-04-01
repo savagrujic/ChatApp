@@ -39,3 +39,33 @@
         font-weight: bolder;
     }
 }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+       height: 80vh;
+       
+       input,p,button {
+        margin: 10px;
+       }
+
+       input {
+        background-color: #EFEFEF;
+        border: none;
+        width: 25vw;
+        height: 6vh;
+        font-size: 1em;
+        padding: 10px;
+
+        
+       }
+       button {
+        width: 25vw;
+        height: 6vh;
+        background-color: #7094E9;
+        color: white;
+        font-weight: bold;
+        border:  none;
+    }
+    }

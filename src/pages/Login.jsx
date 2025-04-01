@@ -13,8 +13,9 @@ export default function() {
             </div>
             <div className="right-container">
                 <form>
-                    <input />
-                    <input />
+                    <h1>Login</h1>
+                    <input placeholder="Username" />
+                    <input placeholder="Password"/>
                     <p>Forgot Password</p>
                     <button>Login</button>
                     <p>or login with platforms</p>
