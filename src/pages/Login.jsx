@@ -2,6 +2,8 @@ import { FaGoogle } from "react-icons/fa";
 import './css/Login.css'
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { auth } from "../firebase-config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 export default function() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -14,6 +16,13 @@ export default function() {
 
     function HandleLogin(e) {
         e.preventDefault()
+        signInWithEmailAndPassword(auth,email,password)
+        .then (() => {
+            navigate('/chat')
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     return(
