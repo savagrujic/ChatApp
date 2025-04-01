@@ -2,10 +2,9 @@ import { FaGoogle } from "react-icons/fa";
 import './css/Register.css'
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, auth } from "firebase/auth";
-
+import { getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import { auth } from "../firebase-config";
 export default function() {
-
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -21,8 +20,14 @@ export default function() {
         e.preventDefault()
         createUserWithEmailAndPassword(auth,email,password)
         .then((userCredential) => {
-            const user = userCredential.user
-            console.log(user)
+            
+            updateProfile(auth.currentUser, {
+                displayName: username
+            }).then(() => {
+                const user = userCredential.user
+                console.log(user)
+                naviage('/chat')    
+            })
         }).catch((err) => {
             console.error(err)
         })
@@ -33,6 +38,7 @@ export default function() {
             <div className="right-container">
                 <form onSubmit={HandleRegister}>
                     <h1>Registration</h1>
+                    <input className="input1"  required onChange={(e) => setUsername(e.target.value)} type="" placeholder="Username"/>
                     <input className="input2"  required onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"/>
                     <input className="input1"  required onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                     <input className="input2"  required onChange={(e) => setConfirmpassword(e.target.value)} type="password" placeholder="Confirm Password"/>
