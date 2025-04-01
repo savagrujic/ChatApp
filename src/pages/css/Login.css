@@ -38,6 +38,11 @@
         color: white;
         font-weight: bolder;
     }
+    button:hover {
+        background-color: #a8c3fe;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+    }
 }
     form {
         display: flex;
@@ -72,6 +77,12 @@
         color: white;
         font-weight: bold;
         border:  none;
+        transition: 0.3s ease-in-out;
+    }
+    button:hover {
+        background-color: #8ba8ed;
+        cursor: pointer;
+        
     }
     }
 

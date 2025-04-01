@@ -1,7 +1,15 @@
 import { FaGoogle } from "react-icons/fa";
 import './css/Register.css'
+import { useNavigate } from "react-router";
+
+
 export default function() {
 
+    let naviage = useNavigate()
+
+    function hadnelanvigate() {
+        naviage('/')
+    }
     return(
         <div className="wrapper">
             <div className="right-container">
@@ -11,17 +19,17 @@ export default function() {
                     <input className="input2" placeholder="Email"/>
                     <input className="input1" placeholder="Password" />
                     <input className="input2" placeholder="Confirm Password"/>
-                    <p>Forgot Password</p>
-                    <button>Login</button>
+                 
+                    <button>Register</button>
                     <p>or registrate with platforms</p>
                     <FaGoogle />
                 </form>
             </div>
             <div className="left-container">
                     <div className="centered">
-                    <h1>Hello, Welcome!</h1>
-                    <p>Don't have an account?</p>
-                    <button>Register</button>
+                    <h1>Welcome, Back!</h1>
+                    <p>Alredy have an account?</p>
+                    <button  onClick={hadnelanvigate}>Login</button>
                     </div>
             </div>
         </div>

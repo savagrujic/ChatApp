@@ -1,6 +1,13 @@
 import { FaGoogle } from "react-icons/fa";
 import './css/Login.css'
+import { useNavigate } from "react-router";
 export default function() {
+
+    let navigate = useNavigate()
+
+    function handlenavigate() {
+        navigate('/register')
+    }
 
     return(
         <div className="wrapper">
@@ -8,7 +15,7 @@ export default function() {
                     <div className="centered">
                     <h1>Hello, Welcome!</h1>
                     <p>Don't have an account?</p>
-                    <button>Register</button>
+                    <button onClick={handlenavigate}>Register</button>
                     </div>
             </div>
             <div className="right-container">
