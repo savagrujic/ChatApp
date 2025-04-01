@@ -57,9 +57,14 @@
         height: 6vh;
         font-size: 1em;
         padding: 10px;
+       
+      
+        border-radius: 20px;
+     
 
         
        }
+
        button {
         width: 25vw;
         height: 6vh;
@@ -68,4 +73,17 @@
         font-weight: bold;
         border:  none;
     }
+    }
+
+    .input1 {
+        background: url(./icons/user.png) no-repeat 7px 20px;
+        background-size: 20px;
+        background-position: 95% 50%;
+        background-color: #EFEFEF;
+    }
+    .input2 {
+        background: url(./icons/padlock.png) no-repeat 7px 20px;
+        background-size: 20px;
+        background-position: 95% 50%;
+        background-color: #EFEFEF;
     }
