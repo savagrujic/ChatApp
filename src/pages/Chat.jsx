@@ -49,7 +49,7 @@ export default function Chat() {
     <div className="wrapperchat">
      
  
-    <h2>Hello {auth.currentUser.displayName}!</h2>
+    <h2 style={{marginTop: '30px'}}>Hello <span style={{color:'#7094E9'}}>{auth.currentUser.displayName}!</span> </h2>
     <div className="messagebox">
         {messageList.map((item)=> (
             <div style={{margin: '10px'}}>
