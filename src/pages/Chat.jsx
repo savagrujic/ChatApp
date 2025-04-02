@@ -4,7 +4,7 @@ import { auth,db } from "../firebase-config"
 import { useNavigate } from "react-router"
 import { useEffect, useState } from "react"
 import { collection, addDoc,doc,onSnapshot, query, serverTimestamp, orderBy } from "firebase/firestore"
-
+import './css/Chat.css'
 
 export default function Chat() {
     const [message, setMessage] = useState('')
@@ -46,12 +46,11 @@ export default function Chat() {
     }, [])
     
     return( 
-    <div>
+    <div className="wrapperchat">
      
  
     <h2>Hello {auth.currentUser.displayName}!</h2>
     <div className="messagebox">
-        Messages wil be Here
         {messageList.map((item)=> (
             <div style={{margin: '10px'}}>
             <p>{item.name}</p>
@@ -59,9 +58,9 @@ export default function Chat() {
             </div>
         ))}
     </div>
-        <input value = {message}placeholder="Enter Your Messages Here" onChange={(e) => setMessage(e.target.value)}/>
-        <button onClick={SendMessage}>Send</button>
-        <button onClick={singOut}>LogOut</button>
+        <input className="sendmsginput" value = {message}placeholder="Enter Your Messages Here" onChange={(e) => setMessage(e.target.value)}/>
+        <button  className='btn' onClick={SendMessage}>Send</button>
+        <button className='btn' onClick={singOut}>LogOut</button>
   
     
     

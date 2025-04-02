@@ -1,0 +1,30 @@
+
+.wrapperchat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.messagebox {
+    margin-top: 5vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 70vh;
+    width: 40vw;
+}
+.sendmsginput {
+    width: 40vw;
+    height: 4vh;
+    padding: 10px;
+}
+.btn {
+    width: 40vw;
+    height: 6vh;
+    background-color: #7094E9;
+    border: none;
+    border: 2px white solid;
+    color: white;
+    font-weight: bold;
+
+}
