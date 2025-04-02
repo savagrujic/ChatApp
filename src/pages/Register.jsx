@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { auth } from "../firebase-config";
-export default function() {
+export default function({isAuth}) {
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -26,6 +26,7 @@ export default function() {
             }).then(() => {
                 const user = userCredential.user
                 console.log(user)
+                isAuth(true)
                 naviage('/chat')    
             })
         }).catch((err) => {

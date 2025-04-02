@@ -2,9 +2,9 @@ import { FaGoogle } from "react-icons/fa";
 import './css/Login.css'
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { auth } from "../firebase-config";
-import { signInWithEmailAndPassword } from "firebase/auth";
-export default function() {
+import { app} from "../firebase-config";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+export default function({isAuth}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     let navigate = useNavigate()
@@ -16,9 +16,11 @@ export default function() {
 
     function HandleLogin(e) {
         e.preventDefault()
+        let auth = getAuth(app)
         signInWithEmailAndPassword(auth,email,password)
         .then (() => {
             navigate('/chat')
+            isAuth(true)
         })
         .catch((error) => {
             console.error(error)

@@ -1,18 +1,23 @@
 
-import { signOut } from "firebase/auth"
+import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth,db } from "../firebase-config"
 import { useNavigate } from "react-router"
 import { useEffect, useState } from "react"
 import { collection, addDoc,doc,onSnapshot, query, serverTimestamp, orderBy } from "firebase/firestore"
+import { ThreeDot } from "react-loading-indicators"
 import './css/Chat.css'
 
-export default function Chat() {
+export default function Chat({isAuth}) {
     const [message, setMessage] = useState('')
     const [messageList, setMessageList] = useState([])
+    const [name, displayName] = useState('Loading...')
     const navigate = useNavigate()
     function singOut() {
         signOut(auth).then(() => {
+            localStorage.clear()
+            isAuth(false)
             navigate('/')
+          
         }).catch((error) => {
             console.error(error)
         })
@@ -43,20 +48,27 @@ export default function Chat() {
                setMessageList(tempmessage)
             
         })
+
+        const setuserinfo = onAuthStateChanged( auth, (user) => {
+            if(user) {
+                displayName(user.displayName)
+            }
+        })
+       
     }, [])
     
     return( 
     <div className="wrapperchat">
      
  
-    <h2 style={{marginTop: '30px'}}>Hello <span style={{color:'#7094E9'}}>{auth.currentUser.displayName}!</span> </h2>
+    <h2 style={{marginTop: '30px'}}>Welcome <span style={{color:'#7094E9'}}>{name}</span> </h2>
     <div className="messagebox">
-        {messageList.map((item)=> (
+       {messageList.length === 0 ? (<ThreeDot className='loading' color="#7094E9" size="medium" text="" textColor="" />): (messageList.map((item)=> (
             <div style={{margin: '10px'}}>
             <p>{item.name}</p>
             <h3>{item.message}</h3>
             </div>
-        ))}
+        )))}
     </div>
         <input className="sendmsginput" value = {message}placeholder="Enter Your Messages Here" onChange={(e) => setMessage(e.target.value)}/>
         <button  className='btn' onClick={SendMessage}>Send</button>
