@@ -13,6 +13,7 @@ export default function Chat({isAuth}) {
     const [name, displayName] = useState('Loading...')
     const [userid, stUserId] = useState('')
     const navigate = useNavigate()
+    let popupsound = new Audio('../assets/notification-2-269292.mp3')
     function singOut() {
         signOut(auth).then(() => {
             localStorage.clear()
@@ -48,6 +49,7 @@ export default function Chat({isAuth}) {
                     id: mess.data().author.id
                 }))
                setMessageList(tempmessage)
+               popupsound.play()
             
         })
 
@@ -84,7 +86,7 @@ export default function Chat({isAuth}) {
                 borderRadius: '10px'
             }}>
             {userid != item.id ? <p>{item.name}</p>: ''}
-            <h3>{item.message}</h3>
+            <h3 style={{color:'white'}}>{item.message}</h3>
             </div>
         )))}
     </div>

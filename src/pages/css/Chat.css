@@ -17,6 +17,7 @@
     width: 40vw;
     height: 4vh;
     padding: 10px;
+    border-radius: 10px;
 }       
 .btn {
     width: 40vw;
@@ -26,6 +27,7 @@
     border: 2px white solid;
     color: white;
     font-weight: bold;
+    border-radius: 10px;
 
 }
 @media only screen and (max-width: 600px)  {
