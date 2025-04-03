@@ -12,6 +12,12 @@
     overflow-x: hidden;
     height: 70vh;
     width: 40vw;
+    border: 3px #7094E9 solid;
+    border-radius: 20px;
+    padding: 5px;
+}
+.messagebox::-webkit-scrollbar {
+    display: none;  /* For Chrome, Safari, and Edge */
 }
 .sendmsginput {
     width: 40vw;
@@ -28,7 +34,37 @@
     color: white;
     font-weight: bold;
     border-radius: 10px;
+    transition: 0.3s ease-in-out;
 
+}
+.btn:hover {
+    background-color: #a3bfff;
+    cursor: pointer;
+}
+.lowercontainer {
+    display: flex;
+    align-items: center;
+
+    button {
+        width: 5vw;
+        height: 7vh;
+    }
+    input {
+        width: 32vw;
+       
+    }
+
+}
+.upper-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+        width: 8vw;
+        margin-top: 30px;
+        margin-left: 70vw;
+    }
 }
 @media only screen and (max-width: 600px)  {
 

@@ -27,11 +27,13 @@ export default function Chat({isAuth}) {
     const collectionreference = collection(db,'messages')
     const SendMessage = async () => {
         try{
+            if(message != '') {
         await addDoc((collectionreference), {
             message,
             author: {name: auth.currentUser.displayName, id: auth.currentUser.uid},
             time: serverTimestamp()
         })
+    }
         }
         catch(err) {
             console.error(err)
@@ -74,16 +76,18 @@ export default function Chat({isAuth}) {
     return( 
     <div className="wrapperchat">
      
- 
+    <div className="upper-container">
     <h2 style={{marginTop: '30px'}}>Welcome <span style={{color:'#7094E9'}}>{name}</span> </h2>
+    <button className='btn' onClick={singOut}>LogOut</button>
+    </div>
     <div className="messagebox" style={{
         display:'flex',
         flexDirection: 'column'
     }}>
       
-       {messageList.length === 0 ? (<ThreeDot className='loading' color="#7094E9" size="medium" text="" textColor="" />): (messageList.map((item)=> (
+       {messageList.length === 0 ? (<ThreeDot className='loading' color="#7094E9" size="medium" text="" textColor="" />): (messageList.map((item,_)=> (
        
-         <div key = {item.id}style={{
+         <div key = {_}style={{
                 margin: '10px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -100,10 +104,14 @@ export default function Chat({isAuth}) {
             </div>
         )))}
     </div>
-   
-        <input className="sendmsginput" value = {message}placeholder="Enter Your Messages Here" onChange={(e) => setMessage(e.target.value)}/>
+        <div className="lowercontainer">
+        <input className="sendmsginput" value = {message}placeholder="Enter Your Messages Here" 
+        onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={(e) => {if(e.key === 'Enter') {SendMessage()}}}
+        />
         <button  className='btn' onClick={SendMessage}>Send</button>
-        <button className='btn' onClick={singOut}>LogOut</button>
+        </div>
+        
   
     
     
