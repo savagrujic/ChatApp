@@ -11,6 +11,7 @@ export default function Chat({isAuth}) {
     const [message, setMessage] = useState('')
     const [messageList, setMessageList] = useState([])
     const [name, displayName] = useState('Loading...')
+    const [userid, stUserId] = useState('')
     const navigate = useNavigate()
     function singOut() {
         signOut(auth).then(() => {
@@ -43,7 +44,8 @@ export default function Chat({isAuth}) {
 
                 const tempmessage = col.docs.map((mess) => ({
                     message: mess.data().message,
-                    name: mess.data().author.name
+                    name: mess.data().author.name,
+                    id: mess.data().author.id
                 }))
                setMessageList(tempmessage)
             
@@ -52,6 +54,7 @@ export default function Chat({isAuth}) {
         const setuserinfo = onAuthStateChanged( auth, (user) => {
             if(user) {
                 displayName(user.displayName)
+                stUserId(user.uid)
             }
         })
        
@@ -62,14 +65,30 @@ export default function Chat({isAuth}) {
      
  
     <h2 style={{marginTop: '30px'}}>Welcome <span style={{color:'#7094E9'}}>{name}</span> </h2>
-    <div className="messagebox">
+    <div className="messagebox" style={{
+        display:'flex',
+        flexDirection: 'column'
+    }}>
+      
        {messageList.length === 0 ? (<ThreeDot className='loading' color="#7094E9" size="medium" text="" textColor="" />): (messageList.map((item)=> (
-            <div style={{margin: '10px'}}>
-            <p>{item.name}</p>
+       
+         <div style={{
+                margin: '10px',
+                display: 'flex',
+                flexDirection: 'column',
+                marginLeft: userid === item.id ? 'auto' : '',
+                margin: '10px',
+                backgroundColor: '#7094E9',
+                width: '20vh',
+                padding: '10px',
+                borderRadius: '10px'
+            }}>
+            {userid != item.id ? <p>{item.name}</p>: ''}
             <h3>{item.message}</h3>
             </div>
         )))}
     </div>
+   
         <input className="sendmsginput" value = {message}placeholder="Enter Your Messages Here" onChange={(e) => setMessage(e.target.value)}/>
         <button  className='btn' onClick={SendMessage}>Send</button>
         <button className='btn' onClick={singOut}>LogOut</button>
