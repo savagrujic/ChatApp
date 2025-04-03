@@ -29,7 +29,7 @@ export default function({isAuth}) {
 
     return(
         <div className="wrapper">
-            <div className="left-container">
+            <div className="left-container-2">
                     <div className="centered">
                     <h1>Hello, Welcome!</h1>
                     <p>Don't have an account?</p>
@@ -40,7 +40,7 @@ export default function({isAuth}) {
                 <form onSubmit={HandleLogin}>
                     <h1>Login</h1>
                     <input className="input1" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                    <input className="input2" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                    <input className="input2" placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
                     <p>Forgot Password</p>
                     <button>Login</button>
                     <p>or login with platforms</p>

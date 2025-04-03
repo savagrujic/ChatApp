@@ -40,8 +40,8 @@ export default function({isAuth}) {
                 <form onSubmit={HandleRegister}>
                     <h1>Registration</h1>
                     <input className="input1"  required onChange={(e) => setUsername(e.target.value)} type="" placeholder="Username"/>
-                    <input className="input2"  required onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"/>
-                    <input className="input1"  required onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
+                    <input className="input3"  required onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"/>
+                    <input className="input2"  required onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                     <input className="input2"  required onChange={(e) => setConfirmpassword(e.target.value)} type="password" placeholder="Confirm Password"/>
                     {password != confirmpassword ? (<p style={{color:'red'}}>Password are not matching!</p> ): ''}
                     <button>Register</button>

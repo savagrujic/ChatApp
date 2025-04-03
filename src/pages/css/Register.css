@@ -88,6 +88,12 @@
         background-position: 95% 50%;
         background-color: #EFEFEF;
     }
+    .input3 {
+        background: url(./icons/email.png) no-repeat 7px 20px;
+        background-size: 20px;
+        background-position: 95% 50%;
+        background-color: #EFEFEF;
+    }
 
 
     @media only screen and (max-width: 600px) {
