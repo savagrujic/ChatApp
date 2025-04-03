@@ -2,7 +2,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth,db } from "../firebase-config"
 import { useNavigate } from "react-router"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { collection, addDoc,doc,onSnapshot, query, serverTimestamp, orderBy } from "firebase/firestore"
 import { ThreeDot } from "react-loading-indicators"
 import './css/Chat.css'
@@ -12,8 +12,8 @@ export default function Chat({isAuth}) {
     const [messageList, setMessageList] = useState([])
     const [name, displayName] = useState('Loading...')
     const [userid, stUserId] = useState('')
+    const messageEndRef = useRef(null)
     const navigate = useNavigate()
-    let popupsound = new Audio('../assets/notification-2-269292.mp3')
     function singOut() {
         signOut(auth).then(() => {
             localStorage.clear()
@@ -49,9 +49,10 @@ export default function Chat({isAuth}) {
                     id: mess.data().author.id
                 }))
                setMessageList(tempmessage)
-               popupsound.play()
             
-        })
+        }, )
+
+        
 
         const setuserinfo = onAuthStateChanged( auth, (user) => {
             if(user) {
@@ -59,8 +60,16 @@ export default function Chat({isAuth}) {
                 stUserId(user.uid)
             }
         })
-       
+
+
+        
     }, [])
+
+    useEffect(() => {
+        if (messageEndRef.current) {
+            messageEndRef.current.scrollIntoView({ behavior: "smooth" })
+        }
+    }, [messageList])
     
     return( 
     <div className="wrapperchat">
@@ -74,7 +83,7 @@ export default function Chat({isAuth}) {
       
        {messageList.length === 0 ? (<ThreeDot className='loading' color="#7094E9" size="medium" text="" textColor="" />): (messageList.map((item)=> (
        
-         <div style={{
+         <div key = {item.id}style={{
                 margin: '10px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -87,6 +96,7 @@ export default function Chat({isAuth}) {
             }}>
             {userid != item.id ? <p>{item.name}</p>: ''}
             <h3 style={{color:'white'}}>{item.message}</h3>
+            <div ref={messageEndRef}></div>
             </div>
         )))}
     </div>
