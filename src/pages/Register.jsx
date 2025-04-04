@@ -10,6 +10,7 @@ export default function({isAuth}) {
     const [password, setPassword] = useState('')
     const [confirmpassword, setConfirmpassword] = useState('')
     const [canRegister, setCanRegister] = useState(false)
+    const [error, SetErrorMessage] = useState('')
     let naviage = useNavigate()
 
     function hadnelanvigate() {
@@ -31,6 +32,7 @@ export default function({isAuth}) {
             })
         }).catch((err) => {
             console.error(err)
+            SetErrorMessage(err)
         })
         
     }
@@ -43,7 +45,10 @@ export default function({isAuth}) {
                     <input className="input3"  required onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"/>
                     <input className="input2"  required onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                     <input className="input2"  required onChange={(e) => setConfirmpassword(e.target.value)} type="password" placeholder="Confirm Password"/>
+                    
                     {password != confirmpassword ? (<p style={{color:'red'}}>Password are not matching!</p> ): ''}
+                    {error.message?.includes('auth/invalid-email')? (<p style={{color:'red'}}>The Email You Entered isnt Valid</p>) : ''}
+                    {error.message?.includes('auth/weak-password')? (<p style={{color:'red'}}>Password should be at least 6 characters</p>) : ''}
                     <button>Register</button>
                     <p>or registrate with platforms</p>
                     <FaGoogle />

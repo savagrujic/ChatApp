@@ -7,6 +7,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 export default function({isAuth}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error,setError] = useState('')
     let navigate = useNavigate()
 
     function handlenavigate() {
@@ -24,6 +25,7 @@ export default function({isAuth}) {
         })
         .catch((error) => {
             console.error(error)
+            setError(error)
         })
     }
 
@@ -41,9 +43,11 @@ export default function({isAuth}) {
                     <h1>Login</h1>
                     <input className="input1" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                     <input className="input2" placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+                    {error.message?.includes('auth/invalid-email')? (<p style={{color:'red', width: '30vw', textAlign:'center'}}>The email or password you entered does not exist. Please check your credentials and try again.</p>) : ''}
                     <p>Forgot Password</p>
                     <button>Login</button>
                     <p>or login with platforms</p>
+            
                     <FaGoogle />
                 </form>
             </div>

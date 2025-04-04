@@ -77,7 +77,7 @@ export default function Chat({isAuth}) {
     <div className="wrapperchat">
      
     <div className="upper-container">
-    <h2 style={{marginTop: '30px'}}>Welcome <span onClick={() => navigate('/profile')} style={{color:'#7094E9'}}>{name}</span> </h2>
+    <h2 style={{marginTop: '30px'}}>Welcome <span className="spanprofile" onClick={() => navigate('/profile')} style={{color:'#7094E9', transition: '0.3s'}}>{name}</span> </h2>
     <button className='btn' onClick={singOut}>LogOut</button>
     </div>
     <div className="messagebox" style={{

@@ -3,7 +3,7 @@ import { auth } from "../firebase-config";
 import { updateProfile } from "firebase/auth";
 import './css/Profile.css'
 import { useNavigate } from "react-router";
-
+import { RiArrowGoBackLine } from "react-icons/ri";
 export default function Profile() {
 
     const [newName, setNewName] = useState('')
@@ -21,10 +21,10 @@ export default function Profile() {
     }
     return(
         <>
-        <p onClick={() => {navigate('/chat')}}>Back</p>
+        < RiArrowGoBackLine onClick={() => navigate('/chat')} style={{fontSize: '2.2em', padding: '10px', cursor: 'pointer'}} />
         <div className="wrapper">
         <form onSubmit={ChangeName}>
-        <p>Your name is: <span style={{color: '#7094E9'}}>{name}</span> </p>
+        <p>Your name is: <span style={{color: '#7094E9', fontWeight:'bolder'}}>{name}</span> </p>
         <input placeholder="Enter new name: " onChange={((e) => setNewName(e.target.value))} />
         <button>Submit</button>
         </form>
