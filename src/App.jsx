@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Chat from './pages/Chat'
 import { useNavigate } from 'react-router'
+import Profile from './pages/Profile'
 function App() {
   const [auth, isAuth] = useState(false)
   
@@ -29,7 +30,7 @@ function AppRoutes({auth,isAuth}) {
 
   useEffect(() => {
     if(auth) {
-      navigate('/chat')
+    //  navigate('/chat')
       localStorage.setItem('auth',JSON.stringify(auth))
     }
   }, [auth,navigate])
@@ -42,6 +43,8 @@ function AppRoutes({auth,isAuth}) {
           <Route path='/' element = {<Login isAuth={isAuth} />}></Route>
           <Route path='/register' element = {<Register isAuth={isAuth} />}></Route>
           <Route path='/chat' element = {auth ? <Chat isAuth={isAuth} />: <Login isAuth={isAuth} />}></Route>
+          <Route path='/profile' element = {auth ? <Profile isAuth={isAuth} />: <Login isAuth={isAuth} />}></Route>
+          
       </Routes>
   )
 }
