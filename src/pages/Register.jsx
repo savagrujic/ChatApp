@@ -3,7 +3,8 @@ import './css/Register.css'
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth,db } from "../firebase-config";
+import { addDoc, collection } from "firebase/firestore";
 export default function({isAuth}) {
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
@@ -17,7 +18,7 @@ export default function({isAuth}) {
         naviage('/')
     }
 
-    function HandleRegister(e) {
+     function HandleRegister(e) {
         e.preventDefault()
         createUserWithEmailAndPassword(auth,email,password)
         .then((userCredential) => {
@@ -26,6 +27,10 @@ export default function({isAuth}) {
                 displayName: username
             }).then(() => {
                 const user = userCredential.user
+                addDoc(collection(db, 'friends'), {
+                    name: auth.currentUser.displayName,
+                    friends: []
+                })
                 console.log(user)
                 isAuth(true)
                 naviage('/chat')    

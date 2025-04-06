@@ -3,7 +3,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth,db } from "../firebase-config"
 import { useNavigate } from "react-router"
 import { useEffect, useRef, useState } from "react"
-import { collection, addDoc,doc,onSnapshot, query, serverTimestamp, orderBy } from "firebase/firestore"
+import { collection, addDoc,doc,onSnapshot, query, serverTimestamp, orderBy, where, getDocs, updateDoc } from "firebase/firestore"
 import { ThreeDot } from "react-loading-indicators"
 import './css/Chat.css'
 
@@ -12,8 +12,37 @@ export default function Chat({isAuth}) {
     const [messageList, setMessageList] = useState([])
     const [name, displayName] = useState('Loading...')
     const [userid, stUserId] = useState('')
+    const [friendlist, setFriendlist] = useState('')
+    const [friendUsername, setFriendUsername] = useState('')
+    
     const messageEndRef = useRef(null)
+
     const navigate = useNavigate()
+
+
+    async function AddFriend() {
+        const friendsref = collection(db, 'friends')
+        const q = query(friendsref, where('name', '==', auth.currentUser.displayName))
+        let docid,tempfriend
+
+        const querySnap = await getDocs(q)
+        querySnap.forEach((doc) => {
+            docid = doc.id
+            tempfriend = doc.data().friends
+            console.log(doc.data().friends)
+            
+        })
+
+      if(docid) {
+        await updateDoc(doc(db, 'friends', docid), {
+            friends: [...tempfriend, friendUsername]
+        })
+      }
+
+    }
+
+
+
     function singOut() {
         signOut(auth).then(() => {
             localStorage.clear()
@@ -80,6 +109,19 @@ export default function Chat({isAuth}) {
     <h2 style={{marginTop: '30px'}}>Welcome <span className="spanprofile" onClick={() => navigate('/profile')} style={{color:'#7094E9', transition: '0.3s'}}>{name}</span> </h2>
     <button className='btn' onClick={singOut}>LogOut</button>
     </div>
+    <div className="wrapper2">
+    <div className="friendsdiv">
+
+        <input 
+        placeholder="Add a Friend"
+        value={friendUsername}
+        onChange={(e) => setFriendUsername(e.target.value)} 
+        
+        />
+        <button onClick={AddFriend}>Add</button>
+        {friendlist.length === 0 ? <p>You have no Friends</p>: ('')}
+    </div>
+    <div>
     <div className="messagebox" style={{
         display:'flex',
         flexDirection: 'column'
@@ -104,12 +146,15 @@ export default function Chat({isAuth}) {
             </div>
         )))}
     </div>
+    
         <div className="lowercontainer">
         <input className="sendmsginput" value = {message}placeholder="Enter Your Messages Here" 
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => {if(e.key === 'Enter') {SendMessage()}}}
         />
         <button  className='btn' onClick={SendMessage}>Send</button>
+        </div>
+        </div>
         </div>
         
   

@@ -72,6 +72,28 @@ h2  :hover {
    font-size: 1.2em;
   
 }
+
+.wrapper2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .friendsdiv {
+        margin-right: 5vw;
+        font-size: 1.5em;
+      
+        color: #7094E9;
+        
+       
+      
+        div {
+            border: 1px black solid;    
+            padding: 20px;
+            width: 30vw;
+            margin: 10px;
+            background-color: rgb(255, 228, 228);
+        }
+    }
+}
 @media only screen and (max-width: 600px)  {
 
     .messagebox {
